@@ -23,7 +23,7 @@ class Setting extends Model
         'points_price'  => 'integer'
     ];
 
-    static function rules(){
+    static function rules() {
         $langs = LaravelLocalization::getSupportedLanguagesKeys();
         foreach ($langs as $lang) {
             $rules[$lang . '.footer_description'] = 'required|string|min:5|max:255';

@@ -34,7 +34,7 @@
                         <div class="col-lg-12 fv-row fv-plugins-icon-container">
                             <input type="text" name="{{ $name }}[title]"
                                 class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
-                                value="{{ $about->getTranslation($name)->title ?? '' }}" placeholder="{{__('lang.title')}}">
+                                value="{{ isset($about) ? $about->getTranslation($name)->title : '' }}" placeholder="{{__('lang.title')}}">
                             <div
                                 class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
                             </div>
@@ -60,7 +60,7 @@
                         <div class="col-lg-12 fv-row fv-plugins-icon-container">
                             <textarea name="{{$name}}[description]" class="summernote"
                                 class="form-control form-control-lg form-control-solid mb-3 mb-lg-0 "
-                                placeholder="{{ __('lang.description') }}">{{ $about->getTranslation($name)->description ?? '' }} </textarea>
+                                placeholder="{{ __('lang.description') }}">{{ isset($about) ? $about->getTranslation($name)->description : '' }} </textarea>
                             <div
                                 class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
                             </div>
@@ -72,87 +72,77 @@
                 <!--end::Col-->
             </div>
             <!--end::Input group-->
-            <!--begin::Input group-->
-            <div class="row mb-6">
-                <!--begin::Label-->
-                <label class="col-lg-4 col-form-label required fw-semibold fs-6">{{ __('lang.seo') }}</label>
-                <!--end::Label-->
-
-                <!--begin::Col-->
-                <div class="col-lg-8">
-                    <!--begin::Row-->
-                    <div class="row">
-                        <!--begin::Col-->
-                        <div class="col-lg-12 fv-row fv-plugins-icon-container">
-                            <input type="text" name="{{ $name }}[seo]"
-                                class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
-                                value="{{ $about->getTranslation($name)->seo ?? '' }}" placeholder="{{__('lang.seo')}}">
-                            <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
-                            </div>
-                        </div>
-                        <!--end::Col-->
-                    </div>
-                    <!--end::Row-->
-                </div>
-                <!--end::Col-->
-            </div>
-            <!--end::Input group-->
-
-            <!--begin::Input group-->
-            <div class="row mb-6">
-                <!--begin::Label-->
-                <label class="col-lg-4 col-form-label required fw-semibold fs-6">{{ __('lang.keywords') }}</label>
-                <!--end::Label-->
-
-                <!--begin::Col-->
-                <div class="col-lg-8">
-                    <!--begin::Row-->
-                    <div class="row">
-                        <!--begin::Col-->
-                        <div class="col-lg-12 fv-row fv-plugins-icon-container">
-                            <input type="text" name="{{ $name }}[keywords]"
-                                class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
-                                value="{{ $about->getTranslation($name)->keywords ?? '' }}" placeholder="{{__('lang.keywords')}}">
-                            <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
-                            </div>
-                        </div>
-                        <!--end::Col-->
-                    </div>
-                    <!--end::Row-->
-                </div>
-                <!--end::Col-->
-            </div>
-            <!--end::Input group-->
-
-            <!--begin::Input group-->
-            <div class="row mb-6">
-                <!--begin::Label-->
-                <label class="col-lg-4 col-form-label required fw-semibold fs-6">{{ __('lang.focus_keyword') }}</label>
-                <!--end::Label-->
-
-                <!--begin::Col-->
-                <div class="col-lg-8">
-                    <!--begin::Row-->
-                    <div class="row">
-                        <!--begin::Col-->
-                        <div class="col-lg-12 fv-row fv-plugins-icon-container">
-                            <input type="text" name="{{ $name }}[focus_keyword]"
-                                class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
-                                value="{{ $about->getTranslation($name)->focus_keyword ?? '' }}" placeholder="{{__('lang.focus_keyword')}}">
-                            <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
-                            </div>
-                        </div>
-                        <!--end::Col-->
-                    </div>
-                    <!--end::Row-->
-                </div>
-                <!--end::Col-->
-            </div>
-            <!--end::Input group-->
-
-
 
         </div>
         @endforeach
     </div>
+
+</div>
+      <!--begin::Input group-->
+      <div class="fv-row mb-10 fv-plugins-icon-container">
+        <!--begin::Label-->
+        <label class="d-block fw-semibold fs-6 mb-5">
+            <span class="required">{{__('lang.media')}}</span>
+        </label>
+        <!--end::Label-->
+        <!--begin::Image input placeholder-->
+        <style>
+            .image-input-placeholder {
+                background-image: url({{asset('assets/media/svg/files/blank-image.svg')}});
+            }
+
+            [data-bs-theme="dark"] .image-input-placeholder {
+                background-image: url({{asset('assets/media/svg/files/blank-image-dark.svg')}});
+            }
+        </style>
+        <!--end::Image input placeholder-->
+        <!--begin::Image input-->
+        <div class="image-input image-input-empty image-input-outline image-input-placeholder" data-kt-image-input="true">
+            <!--begin::Preview existing avatar-->
+            <div class="image-input-wrapper w-125px h-125px" @isset( $about->photo )
+                {{-- style='background-image:url({{asset('images/'.$deck->file)}})' @endisset> --}}
+                style='background-image:url( {{ $about->photo }} )' @endisset>
+            </div>
+             {{--  --}}
+            <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                data-kt-image-input-action="change" data-bs-toggle="tooltip" aria-label="Change avatar"
+                data-bs-original-title="Change avatar" data-kt-initialized="1">
+                <i class="ki-duotone ki-pencil fs-7">
+                    <span class="path1"></span>
+                    <span class="path2"></span>
+                </i>
+                <!--begin::Inputs-->
+                <input type="file" id="media" name="photo" accept=".png, .jpg, .jpeg, .mp4 ,.auv">
+                <input type="hidden" name="avatar_remove">
+                <!--end::Inputs-->
+            </label>
+            <!--end::Label-->
+            <!--begin::Cancel-->
+            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                data-kt-image-input-action="cancel" data-bs-toggle="tooltip" aria-label="Cancel avatar"
+                data-bs-original-title="Cancel avatar" data-kt-initialized="1">
+                <i class="ki-duotone ki-cross fs-2">
+                    <span class="path1"></span>
+                    <span class="path2"></span>
+                </i>
+            </span>
+            <!--end::Cancel-->
+            <!--begin::Remove-->
+            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                data-kt-image-input-action="remove" data-bs-toggle="tooltip" aria-label="Remove avatar"
+                data-bs-original-title="Remove avatar" data-kt-initialized="1">
+                <i class="ki-duotone ki-cross fs-2">
+                    <span class="path1"></span>
+                    <span class="path2"></span>
+                </i>
+            </span>
+            <!--end::Remove-->
+        </div>
+        <!--end::Image input-->
+        <!--begin::Hint-->
+        <div class="form-text">{{__('lang.allowedslidertypes')}}</div>
+        <!--end::Hint-->
+        <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback"></div>
+    </div>
+    <!--end::Input group-->
 </div>

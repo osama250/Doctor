@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests\AdminPanel;
 
-use App\Models\Overview;
+use App\Models\AboutUs;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateOverviewRequest extends FormRequest
+class CreateAboutUsRequest extends FormRequest
 {
 
     public function authorize()
@@ -15,8 +15,6 @@ class UpdateOverviewRequest extends FormRequest
 
     public function rules()
     {
-        $rules              = Overview::rules();
-        $rules['photo']     = 'nullable';
-        return $rules;
+        return AboutUs::rules();
     }
 }

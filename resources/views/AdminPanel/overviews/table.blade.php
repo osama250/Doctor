@@ -4,7 +4,6 @@
     <thead>
         <tr class="fw-6 fw-semibold text-gray-600">
             <th class="min-w-250px">{{ __('lang.title') }}</th>
-            <th class="min-w-250px">{{ __('lang.sub_title') }}</th>
             <th class="min-w-250px">{{ __('lang.description') }}</th>
             <th class="min-w-250px">{{ __('lang.phone') }}</th>
             <th class="min-w-150px">{{ __('lang.actions') }}</th>
@@ -19,14 +18,11 @@
                 <span class="badge badge-light-success fs-7 fw-bold">{{ $overview->title }}</span>
             </td>
             <td>
-                <span class="badge badge-light-success fs-7 fw-bold">{{ $overview->subtitle }}</span>
-            </td>
-            <td>
                 <span class="fs-7 fw-bold"> {{ $overview->description }}</span>
             </td>
             <td>
                 <span class="fs-7 fw-bold">
-                    <img src="{{ asset('images/'.$overview->photo ) }}" alt="" width="250px" height="250px"> <br>
+                    <img src="{{ $overview->photo }}" alt="" width="250px" height="250px"> <br>
                 </span>
             </td>
             <td>

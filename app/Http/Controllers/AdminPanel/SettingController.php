@@ -25,9 +25,6 @@ class SettingController extends AppBaseController
         // $this->middleware('permission:Delete Slider', ['only' => ['destroy']]);
     }
 
-    /**
-     * Display a listing of the Setting.
-     */
     public function index(Request $request)
     {
         $settings = Setting::first();
@@ -48,7 +45,7 @@ class SettingController extends AppBaseController
      */
     public function store(CreateSettingRequest $request)
     {
-        $input = $request->all();
+        $input    = $request->all();
         $settings = Setting::first();
 
         if($settings){

@@ -9,7 +9,6 @@ use App\Repositories\OverviewRepository;
 use Illuminate\Http\Request;
 use Flash;
 use App\Models\Overview;
-use App\Models\OverviewPhoto;
 
 class OverviewController extends AppBaseController
 {
@@ -42,11 +41,6 @@ class OverviewController extends AppBaseController
         // Overview::create( $request->all() );
         $input       = $request->all();
         $overview    = $this->overviewRepository->create( $input );
-        foreach( $request->photos as $photo ) {
-            $overview->photos()->create( [
-                'photo' => $photo
-            ]);
-        }
         return redirect(route('overviews.index'))->with('success',__('lang.created'));
     }
 
@@ -68,20 +62,8 @@ class OverviewController extends AppBaseController
         // $overview->update( $request->all() );
         $overview = Overview::findOrFail($id);
         $overview = $this->overviewRepository->update($request->all() , $id);
-        if( $request->photos ) {
-            foreach( $request->photos as $photo ) {
-                $overview->photos()->create( [
-                    'photo' => $photo
-                ]);
-            }
-        }
         return redirect(route('overviews.index'))->with('success',__('lang.created'));
 
-    }
-
-    public function deletePhoto($id) {
-        OverviewPhoto::findOrFail($id)->delete();
-        return response([], 200);
     }
 
     public function destroy($id)

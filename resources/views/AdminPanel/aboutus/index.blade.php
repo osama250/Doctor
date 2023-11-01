@@ -28,8 +28,8 @@
                 <!--end::Breadcrumb-->
             </div>
             <!--end::Page title-->
-            {{-- <!--begin::Actions-->
-            @if(auth()->user()->can('Create Aboutus'))
+          <!--begin::Actions-->
+            @if(auth()->user()->can('Add Aboutus'))
                 <div class="d-flex align-items-center gap-2 gap-lg-3">
 
                 <!--begin::Primary button-->
@@ -38,7 +38,7 @@
                 <!--end::Primary button-->
                 </div>
             @endif
-            <!--end::Actions--> --}}
+            {{-- <!--end::Actions--> --}}
         </div>
         <!--end::Toolbar container-->
     </div>

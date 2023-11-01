@@ -78,7 +78,7 @@ Route::group(
             Route::resource('admins', AdminController::class);
             Route::resource('role', RoleController::class);
             Route::resource('permessions', PermessionController::class);
-            Route::resource('aboutus', AboutUsController::class);
+            Route::resource('aboutus', AboutUsController::class);  ///
             Route::resource('socials', SocialController::class);
             Route::resource('coupons', CouponController::class);
             Route::resource('users', UserController::class);
@@ -161,11 +161,5 @@ Route::post(
     'generator_builder/generate-from-file',
     '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@generateFromFile'
 )->name('io_generator_builder_generate_from_file');
-
-
-
-
-
-// Route::resource('inspirations', App\Http\Controllers\InspirationController::class);
 
 

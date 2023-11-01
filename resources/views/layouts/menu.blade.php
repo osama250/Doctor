@@ -236,3 +236,10 @@
         <p>Questions</p>
     </a>
 </li>
+
+<li class="nav-item">
+    <a href="{{ route('aboutuses.index') }}" class="nav-link {{ Request::is('aboutuses*') ? 'active' : '' }}">
+        <i class="nav-icon fas fa-home"></i>
+        <p>Aboutuses</p>
+    </a>
+</li>

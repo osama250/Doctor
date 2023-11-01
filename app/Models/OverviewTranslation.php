@@ -10,6 +10,6 @@ class OverviewTranslation extends Model
     use HasFactory;
     public $table         = 'overview_translations';
     protected $primaryKey = 'id';
-    protected $fillable   = ['title','subtitle','description'];
+    protected $fillable   = [ 'title','description' ];
     public $timestamps    = false;
 }

@@ -2,61 +2,70 @@
 
 namespace App\Http\Controllers\AdminPanel;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\AdminPanel\AboutUsRequest;
-use App\Models\AboutUs;
+use App\Http\Requests\AdminPanel\CreateAboutUsRequest;
+use App\Http\Requests\AdminPanel\UpdateAboutUsRequest;
+use App\Http\Controllers\AppBaseController;
+use App\Repositories\AboutUsRepository;
 use Illuminate\Http\Request;
+use Flash;
 
-class AboutUsController extends Controller
+class AboutUsController extends AppBaseController
 {
-    public function __construct()
+    /** @var AboutUsRepository $aboutUsRepository*/
+    private $aboutUsRepository;
+
+    public function __construct(AboutUsRepository $aboutUsRepo)
     {
-        $this->middleware('permission:View Aboutus|Edit Aboutus', ['only' => ['index']]);
+        $this->aboutUsRepository = $aboutUsRepo;
+        $this->middleware('permission:View Aboutus|Add Aboutus|Edit Aboutus|Delete Aboutus', ['only' => ['index', 'store']]);
+        $this->middleware('permission:Add Aboutus', ['only' => ['create', 'store']]);
         $this->middleware('permission:Edit Aboutus', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:Delete Aboutus', ['only' => ['destroy']]);
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $aboutus=AboutUs::all();
-        return view('AdminPanel.aboutus.index',get_defined_vars());
+        $aboutus = $this->aboutUsRepository->paginate(10);
+        return view('AdminPanel.aboutus.index' , get_defined_vars() );
     }
 
+    public function create()
+    {
+        return view('AdminPanel.aboutus.create');
+    }
 
-    // public function create()
-    // {
-    //     //
-    // }
+    public function store(CreateAboutUsRequest $request)
+    {
+        $input      = $request->all();
+        $aboutUs    = $this->aboutUsRepository->create($input);
+        return redirect(route('aboutus.index'))->with(__('lang.created'));
 
+    }
 
-    // public function store(Request $request)
-    // {
-    //     //
-    // }
-
-
-    // public function show($id)
-    // {
-    //     //
-    // }
-
+    public function show($id)
+    {
+        $aboutUs = $this->aboutUsRepository->find($id);
+        return view('aboutus.show')->with('aboutUs', $aboutUs);
+    }
 
     public function edit($id)
     {
-        $about = AboutUs::first();
-        return view('AdminPanel.aboutus.edit',get_defined_vars());
+        $about = $this->aboutUsRepository->find($id);
+        return view('AdminPanel.aboutus.edit' , get_defined_vars() );
     }
 
-
-    public function update(AboutUsRequest $request, $id)
+    public function update($id, UpdateAboutUsRequest $request)
     {
-        $about = AboutUs::first();
-        $about->update($request->all());
-        return redirect()->route('aboutus.index')->with('success', __('lang.updated'));
+        $aboutUs = $this->aboutUsRepository->find($id);
+        $aboutUs = $this->aboutUsRepository->update($request->all(), $id);
+        return redirect(route('aboutus.index'));
     }
 
 
-    // public function destroy($id)
-    // {
-    //     //
-    // }
+    public function destroy($id)
+    {
+        $aboutUs = $this->aboutUsRepository->find($id);
+        $this->aboutUsRepository->delete($id);
+        return redirect(route('aboutus.index'));
+    }
 }

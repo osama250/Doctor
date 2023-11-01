@@ -48,34 +48,6 @@
                 <!--end::Col-->
             </div>
             <!--end::Input group-->
-
-            <!--begin::Input group-->
-            <div class="row mb-3">
-                <!--begin::Label-->
-                <label class="col-lg-4 col-form-label required fw-semibold fs-6">{{ __('lang.sub_title') }}</label>
-                <!--end::Label-->
-
-                <!--begin::Col-->
-                <div class="col-lg-8">
-                    <!--begin::Row-->
-                    <div class="row">
-                        <!--begin::Col-->
-                        <div class="col-lg-12 fv-row fv-plugins-icon-container">
-                            <input type='text' name="{{$name}}[sub_title]"
-                                class="form-control form-control-lg form-control-solid mb-3 mb-lg-0 "
-                                placeholder="{{ __('lang.sub_title') }}"
-                                value="{{isset($slider) && isset($slider->getTranslation($name)->sub_title)? $slider->getTranslation($name)->sub_title : '' }}">
-                            <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
-                            </div>
-                        </div>
-                        <!--end::Col-->
-                    </div>
-                    <!--end::Row-->
-                </div>
-                <!--end::Col-->
-            </div>
-            <!--end::Input group-->
-
         </div>
         @endforeach
 
