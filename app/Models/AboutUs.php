@@ -11,7 +11,7 @@ use App\Traits\UploadImage;
 class AboutUs extends Model
 {
     use HasFactory, Translatable , UploadImage;
-    protected $fillable          =  [ 'photo','title','description' ];
+    protected $fillable          =  [ 'photo','url','title','description' ];
     public $translatedAttributes =  [ 'title', 'description' ];
 
     public static function rules() {

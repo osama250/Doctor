@@ -1,30 +1,30 @@
 <!-- Id Field -->
 <div class="col-sm-12">
     {!! Form::label('id', 'Id:') !!}
-    <p>{{ $additionalTrip->id }}</p>
+    <p>{{ $service->id }}</p>
 </div>
 
-<!-- Price Field -->
+<!-- Photo Field -->
 <div class="col-sm-12">
-    {!! Form::label('price', 'Price:') !!}
-    <p>{{ $additionalTrip->price }}</p>
+    {!! Form::label('photo', 'Photo:') !!}
+    <p>{{ $service->photo }}</p>
 </div>
 
-<!-- Img Field -->
+<!-- Url Field -->
 <div class="col-sm-12">
-    {!! Form::label('img', 'Img:') !!}
-    <p>{{ $additionalTrip->img }}</p>
+    {!! Form::label('url', 'Url:') !!}
+    <p>{{ $service->url }}</p>
 </div>
 
 <!-- Created At Field -->
 <div class="col-sm-12">
     {!! Form::label('created_at', 'Created At:') !!}
-    <p>{{ $additionalTrip->created_at }}</p>
+    <p>{{ $service->created_at }}</p>
 </div>
 
 <!-- Updated At Field -->
 <div class="col-sm-12">
     {!! Form::label('updated_at', 'Updated At:') !!}
-    <p>{{ $additionalTrip->updated_at }}</p>
+    <p>{{ $service->updated_at }}</p>
 </div>
 

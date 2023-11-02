@@ -46,6 +46,8 @@ use App\Http\Controllers\AdminPanel\InspirationDetailController;
 use App\Http\Controllers\AdminPanel\EscapadeController;
 use App\Http\Controllers\AdminPanel\EscapadeDetailController;
 use App\Http\Controllers\AdminPanel\QuestionController;
+use App\Http\Controllers\AdminPanel\ServiceController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -142,6 +144,8 @@ Route::group(
             Route::get('escapade-details/image/delete/{id}', [ EscapadeDetailController::class ,'deletePhoto'] );
 
             Route::resource('questions', QuestionController::class);
+
+            Route::resource('services', ServiceController::class);
 
         });
     }

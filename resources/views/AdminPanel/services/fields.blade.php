@@ -1,6 +1,6 @@
-@isset($about)
+@isset($service)
 @method('PUT')
-<input type="hidden" value="{{ $about->id }}" name="id">
+<input type="hidden" value="{{ $service->id }}" name="id">
 @endisset
 @csrf
 <div class="card-body border-top p-9">
@@ -35,7 +35,7 @@
                         <div class="col-lg-12 fv-row fv-plugins-icon-container">
                             <input type='text' name="{{$name}}[title]"
                                 class="form-control form-control-lg form-control-solid mb-3 mb-lg-0 "
-                                placeholder="{{ __('lang.title') }}" value="{{isset($about)? $about->getTranslation($name)->title : '' }}">
+                                placeholder="{{ __('lang.title') }}" value="{{isset($service)? $service->getTranslation($name)->title : '' }}">
                             <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
                             </div>
                         </div>
@@ -61,8 +61,8 @@
                             <textarea name="{{$name}}[description]" class="summernote"
                                 class="form-control form-control-lg form-control-solid mb-3 mb-lg-0 "
                                 placeholder="{{ __('lang.value') }}" >
-                                {{ isset($about) ? $about->value : '' }}
-                                {{ isset($about) ? $about->getTranslation($name)->description : '' }}
+                                {{ isset($service) ? $service->value : '' }}
+                                {{ isset($service) ? $service->getTranslation($name)->description : '' }}
                             </textarea>
                             <div
                                 class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
@@ -81,10 +81,10 @@
         @endforeach
   <!--begin::Input group-->
 
-        @if ( !isset($about) )
-                @include('AdminPanel.overviews.video-photo')
+        @if ( !isset($service) )
+                @include('AdminPanel.services.video-photo')
         @endif
-        @if ( isset($about)  && !is_null($about->url) )
+        @if ( isset($service)  && !is_null($service->url) )
             <div class="row mb-3" id="video">
                 <!--begin::Label-->
                 <label class="col-lg-4 col-form-label required fw-semibold fs-6">{{ __('lang.url') }}</label>
@@ -97,7 +97,7 @@
                         <div class="col-lg-12 fv-row fv-plugins-icon-container">
                             <input type='text' name="url"
                                 class="form-control form-control-lg form-control-solid mb-3 mb-lg-0 "
-                                placeholder="{{ __('lang.url') }}" value="{{isset($overview) ? $overview->url : '' }}">
+                                placeholder="{{ __('lang.url') }}" value="{{isset($service) ? $service->url : '' }}">
                             <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
                             </div>
                         </div>
@@ -108,7 +108,7 @@
                 <!--end::Col-->
             </div>
 
-        @elseif ( isset($about)  && !is_null($about->photo) )
+        @elseif ( isset($service)  && !is_null($service->photo) )
             <div class="fv-row mb-10 fv-plugins-icon-container" id="photo">
                 <!--begin::Label-->
                 <label class="d-block fw-semibold fs-6 mb-5">
@@ -129,9 +129,9 @@
                 <!--begin::Image input-->
                 <div class="image-input image-input-empty image-input-outline image-input-placeholder" data-kt-image-input="true">
                     <!--begin::Preview existing avatar-->
-                    <div class="image-input-wrapper w-125px h-125px" @isset( $about->photo )
+                    <div class="image-input-wrapper w-125px h-125px" @isset( $service->photo )
                         {{-- style='background-image:url({{asset('images/'.$deck->file)}})' @endisset> --}}
-                        style='background-image:url( {{ $about->photo }} )' @endisset>
+                        style='background-image:url( {{ $service->photo }} )' @endisset>
                     </div>
                     {{--  --}}
                     <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"

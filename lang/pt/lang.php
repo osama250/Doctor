@@ -133,4 +133,5 @@ return [
     'faquestion'        => 'Questions',
     'question'          => 'Question' ,
     'answer'            => 'Answer',
+    'service'           => 'Services',
 ];
